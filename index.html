@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="icon" href="images\logo_custom.ico" />
+	 <title>
+		  Unité : Garde Noire de Naggarond
+	 </title>
+	<link type="text/css" rel="stylesheet" href="site_web.css">
+	<script type="text/javascript">
+    function picture() { 
+    var pic = "images/BG_unity.jpg"
+    bigpic = document.getElementById("bigpic")
+    bigpic.src = pic;
+    bigpic.width = 400;
+    bigpic.style.display='block';
+    }
+  </script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+  <script type="text/javascript">
+
+    $(document).on("keypress", "input", function(e){
+      if(e.which == 13){
+        getInputValue();
+      }
+    });
+
+    function getInputValue(){
+      document.getElementById("content").innerHTML = "<div id='content'></div>";
+
+      var inputVal = document.getElementById("searchInput").value;
+      console.log(inputVal);
+
+        fetch('https://all-warhammer.github.io/aw/liste2.json')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+          console.log(data);
+
+          inputVal = inputVal.trim();
+          var lengthSearch = inputVal.length
+          console.log(lengthSearch);
+          var found = false
+
+          for (i = 0; i < data.length; i++) {
+            var searchStart = (data[i].nom).substring(0,lengthSearch);
+            var searchStartAlias = searchStart.toLowerCase();
+
+            var searchStartScient = (data[i].nomscient).substring(0,lengthSearch);
+            var searchStartScientAlias = searchStartScient.toLowerCase();
+
+            if (searchStart == inputVal) {
+              console.log("1");
+              addCard(data);
+              found = true
+            } else if (searchStartAlias == inputVal) {
+              console.log("2");
+              addCard(data);
+              found = true
+            } else if (data[i].numero == inputVal) {
+              console.log("3");
+              addCard(data);
+              found = true
+            } else if (searchStartScient == inputVal) {
+              console.log("4");
+              addCard(data);
+              found = true
+            } else if (searchStartScientAlias == inputVal) {
+              console.log("4");
+              addCard(data);
+              found = true
+            }
+          }
+
+          if (found != true) {
+            $('#content').append("  <div id='notFound'>Aucun résultat</div>");
+          }
+
+          
+            })
+            .catch(function (err) {
+                console.log('error: ' + err);
+            });
+    }
+
+    function addCard(data) {
+      $('#content').append("<div> page numéro : " + data[i].numero + "</div><div> race : " + data[i].nomscient + "<p> faction : " + data[i].nom + "</p><p> type d'habitat : " + data[i].lieu + "</p></div></div>");
+    }
+
+  </script>
+</head>
+<body>
+  <div id="main_menu" >
+    <button class = "bouton_logo"> 
+      <a href="page_accueil.html">
+          <img
+            id = "logo"
+            src="images\logo_custom.png" 
+            alt="site logo"
+            title ="the site logo"
+          > 
+      </a>
+    </button>
+      <ul id="menu-demo2">
+        <div class="enfant">
+  <li><a href="#">Histoire</a>
+    <ul>
+      <li ><a id="sous_menu1" href="#">lien sous menu 1</a></li>
+      <li><a id="sous_menu1" href="#">lien sous menu 1</a></li>
+      <li><a id="sous_menu1" href="#">lien sous menu 1</a></li>
+      <li><a id="sous_menu1" href="#">lien sous menu 1</a></li>
+    </ul>
+  </li>
+  <li><a href="#">Races</a>
+    <ul>
+      <li><a id="sous_menu2" href="#">Lien sous menu 2</a></li>
+      <li><a id="sous_menu2" href="#">Lien sous menu 2</a></li>
+      <li><a id="sous_menu2" href="#">Lien sous menu 2</a></li>
+      <li><a id="sous_menu2" href="#">Lien sous menu 2</a></li>
+    </ul>
+  </li>
+  <li><a href="#">Factions</a>
+    <ul>
+      <li><a id="sous_menu3" href="#">lien sous menu 3</a></li>
+      <li><a id="sous_menu3" href="#">lien sous menu 3</a></li>
+      <li><a id="sous_menu3" href="#">lien sous menu 3</a></li>
+      <li><a id="sous_menu3" href="#">lien sous menu 3</a></li>
+    </ul>
+  </li>
+  <li><a href="#">Unités</a>
+    <ul>
+      <li><a id="sous_menu4" href="#">Lien sous menu 4</a></li>
+      <li><a id="sous_menu4" href="#">Lien sous menu 4</a></li>
+      <li><a id="sous_menu4" href="#">Lien sous menu 4</a></li>
+      <li><a id="sous_menu4" href="#">Lien sous menu 4</a></li>
+    </ul>
+  </li>
+</div>
+</ul>
+</ul>
+<div class="br_recherche">
+<input id="searchInput"
+    placeholder="Recherche sur le site…" required>
+    <button id="searchButton" onclick="getInputValue();">Rechercher</button>
+</div>
+</div>
+  <div class="global" id="body">
+	<p id="titre">
+    <br>
+		Garde Noire de Naggarond
+	</p>
+	<p style="line-height:40px;" id="sous_titre">
+		Ces soldats d'élites Elfes Noirs font saigner leurs ennemies à la gloire du Roi Sorcier
+	</p>
+	<img id="bigpic" src="bigpic" style="display:none;"/>
+    <button id="par_d" class = "bouton_image" onclick="picture()" >
+      <div id="img"><img
+        src="D:\Users\rohan\Desktop\site_warhammer\images\blackguard.png" 
+        alt="blackguard of Naggarond"
+        hspace=20
+        title="A blackguard of Naggarond Soldier">
+      </div>
+    </button>
+    <p align="justify"  style="line-height:35px;" id="corps">
+		La Garde Noire est l'armée personnelle de Malékith et n'obéit donc qu'à lui, et à lui seul. Ses membres sont recrutés parmi les fils des familles ayant la faveur du Roi Sorcier. Ils sont enlevés dès leur naissance à leur mère, qui ne souffre pas puisqu'elle est passée au fil de l'épée dans la foulée. Ainsi privé de tout lien familial pouvant le distraire, l'enfant est élevé dans les casernes de la Garde Noire, et apprend à dispenser la mort avec une aisance digne des troupes d'élite du Roi Sorcier. Les casernes de la Garde Noire sont divisées en vingt « tours » qui s'opposent régulièrement lors de concours de torture et de prouesses martiales. Cette rivalité est encouragée par le Roi Sorcier, et chaque année se déroule un grand tournoi visant à déterminer laquelle des tours aura préséance sur les autres. Les chefs de chaque faction, qui ont le rang de Maître de la Tour, sont des soldats si épris de carnage et de batailles qu'ils restent dans la Garde Noire longtemps après expiration de leur mandat. Ces vétérans endurcis dirigent leurs combattants d'une poigne de fer, afin que l'honneur de leur tour de soit jamais sali par un manque de discipline, ou pire, par des élans de compassion de la part de ses guerriers.
+    </p>
+    <div class="center" >
+      <div id="content"></div>
+  </div>
+</div>
+</body>
+</html>
